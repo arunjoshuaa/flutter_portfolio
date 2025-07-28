@@ -2,6 +2,8 @@ import 'package:arun_joshua/view/screens/about/about_view.dart';
 import 'package:arun_joshua/view/screens/contact/contact_view.dart';
 import 'package:arun_joshua/view/screens/home/home_view.dart';
 import 'package:arun_joshua/view/screens/project/project_view.dart';
+import 'package:arun_joshua/view/widgets/custom_appbar.dart';
+import 'package:arun_joshua/view/widgets/custom_bottomnavbar.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -27,17 +29,9 @@ class _PortfoiloAppState extends State<PortfoiloApp> {
       title: "Arun Joshua Portfolio",
       theme: ThemeData(fontFamily: 'Roboto'),
       home: Scaffold(
-        appBar: AppBar(title: const Text("Arun Joshua"),centerTitle: true,),
+        appBar:CustomAppbar(),
         body: screens[selectedIndex],
-        bottomNavigationBar: BottomNavigationBar(
-          currentIndex: selectedIndex,
-          onTap: onItemTapped,
-          items: const[
-            BottomNavigationBarItem(icon: Icon(Icons.home),label: "Home"),
-            BottomNavigationBarItem(icon: Icon(Icons.person),label: "About"),
-            BottomNavigationBarItem(icon: Icon(Icons.work),label: "Projects"),
-            BottomNavigationBarItem(icon: Icon(Icons.mail),label: "Contact")
-          ]),
+        bottomNavigationBar: CustomBottomnavbar(currentIndex: selectedIndex, ontap: onItemTapped),
       ),
     );
   }
