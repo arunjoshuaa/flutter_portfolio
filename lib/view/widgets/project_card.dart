@@ -9,11 +9,18 @@ class ProjectCard extends StatelessWidget {
   final Project project;
   const ProjectCard({super.key,required this.project});
 
-void urlLaunch()async{
-  final Uri url=Uri.parse("https://www.linkedin.com/in/arunjoshua/");
+void urlLaunch(BuildContext context)async{
+  if(project.link==null||project.link.trim().isEmpty){
+    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content:  Text("No project link available")));return;
+  }
+  final Uri url=Uri.parse(project.link);
   if(await canLaunchUrl(url)){
     await launchUrl(url);
-  }
+  }else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Could not launch URL")),
+      );
+    } 
 }
   @override
   Widget build(BuildContext context) {
@@ -32,7 +39,13 @@ void urlLaunch()async{
           const SizedBox(height: 8,),
           Text("Tech:${project.tech}",style: TextStyle(fontStyle: FontStyle.italic),),
           SizedBox(height: 12,),
-          ElevatedButton(onPressed: urlLaunch, child: const Text("View on GitHub"))
+          Align(
+            alignment: Alignment.centerRight,
+            child: ElevatedButton.icon(onPressed: ()=>urlLaunch(context), 
+            icon: Icon(Icons.open_in_new),
+            label: const Text("View Project")),
+
+             )
         ],
         ),
       ),
