@@ -27,7 +27,19 @@ class _PortfoiloAppState extends State<PortfoiloApp> {
     return  MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "Arun Joshua Portfolio",
-      theme: ThemeData(fontFamily: 'Roboto'),
+      theme: ThemeData(
+        brightness: Brightness.light,
+        primarySwatch: Colors.teal, //Sets app’s main theme color (with multiple shades)
+        scaffoldBackgroundColor: Colors.white,
+        useMaterial3: true, // Enables Material Design 3 for better UI
+        fontFamily: 'Roboto'),
+        darkTheme: ThemeData(
+          brightness: Brightness.dark,
+          primarySwatch: Colors.teal,
+          scaffoldBackgroundColor: Colors.black,
+          useMaterial3: true
+        ),
+        themeMode: ThemeMode.system,
       home: Scaffold(
         appBar:CustomAppbar(),
         body: screens[selectedIndex],
